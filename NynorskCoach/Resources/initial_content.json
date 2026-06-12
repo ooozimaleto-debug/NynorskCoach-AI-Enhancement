@@ -1,0 +1,145 @@
+{
+  "topics": [
+    {
+      "id": "alfabetet",
+      "nynorsk_title": "Alfabetet",
+      "emoji": "🔤",
+      "rank": "oppdagar",
+      "level": "A0",
+      "translations": {
+        "Russian": "Алфавит",
+        "English": "Alphabet",
+        "Ukrainian": "Алфавіт",
+        "Polish": "Alfabet",
+        "Bokmål": "Alfabetet"
+      },
+      "words": [
+        { "nynorsk": "A a", "translations": { "Russian": "А", "English": "A", "Ukrainian": "А", "Polish": "A", "Bokmål": "A" }, "gender": "none", "icon": "a.circle" },
+        { "nynorsk": "B b", "translations": { "Russian": "Б", "English": "B", "Ukrainian": "Б", "Polish": "B", "Bokmål": "B" }, "gender": "none", "icon": "b.circle" },
+        { "nynorsk": "E e", "translations": { "Russian": "Э", "English": "E", "Ukrainian": "Е", "Polish": "E", "Bokmål": "E" }, "gender": "none", "icon": "e.circle" },
+        { "nynorsk": "O o", "translations": { "Russian": "У", "English": "U", "Ukrainian": "У", "Polish": "U", "Bokmål": "O" }, "gender": "none", "icon": "o.circle" },
+        { "nynorsk": "U u", "translations": { "Russian": "Ю", "English": "U", "Ukrainian": "Ю", "Polish": "U", "Bokmål": "U" }, "gender": "none", "icon": "u.circle" },
+        { "nynorsk": "Y y", "translations": { "Russian": "Ю/И", "English": "Y/I", "Ukrainian": "Ю/І", "Polish": "Y/I", "Bokmål": "Y" }, "gender": "none", "icon": "y.circle" },
+        { "nynorsk": "Æ æ", "translations": { "Russian": "АЭ", "English": "AE", "Ukrainian": "АЕ", "Polish": "AE", "Bokmål": "Æ" }, "gender": "none", "icon": "ae.circle" },
+        { "nynorsk": "Ø ø", "translations": { "Russian": "Ё", "English": "O (soft)", "Ukrainian": "ЬО", "Polish": "O (miękkie)", "Bokmål": "Ø" }, "gender": "none", "icon": "o.circle.fill" },
+        { "nynorsk": "Å å", "translations": { "Russian": "О", "English": "O", "Ukrainian": "О", "Polish": "O", "Bokmål": "Å" }, "gender": "none", "icon": "a.circle.fill" }
+      ]
+    },
+    {
+      "id": "tall",
+      "nynorsk_title": "Tall",
+      "emoji": "🔢",
+      "rank": "oppdagar",
+      "level": "A0",
+      "translations": {
+        "Russian": "Числа",
+        "English": "Numbers",
+        "Ukrainian": "Числа",
+        "Polish": "Liczby",
+        "Bokmål": "Tall"
+      },
+      "words": [
+        { "nynorsk": "Null", "translations": { "Russian": "Ноль", "English": "Zero", "Ukrainian": "Нуль", "Polish": "Zero", "Bokmål": "Null" }, "gender": "none", "icon": "0.circle" },
+        { "nynorsk": "Ein", "translations": { "Russian": "Один", "English": "One", "Ukrainian": "Один", "Polish": "Jeden", "Bokmål": "En" }, "gender": "masculine", "icon": "1.circle" },
+        { "nynorsk": "To", "translations": { "Russian": "Два", "English": "Two", "Ukrainian": "Два", "Polish": "Dwa", "Bokmål": "To" }, "gender": "none", "icon": "2.circle" },
+        { "nynorsk": "Tre", "translations": { "Russian": "Три", "English": "Three", "Ukrainian": "Три", "Polish": "Trzy", "Bokmål": "Tre" }, "gender": "none", "icon": "3.circle" },
+        { "nynorsk": "Fire", "translations": { "Russian": "Четыре", "English": "Four", "Ukrainian": "Чотири", "Polish": "Cztery", "Bokmål": "Fire" }, "gender": "none", "icon": "4.circle" },
+        { "nynorsk": "Fem", "translations": { "Russian": "Пять", "English": "Five", "Ukrainian": "П'ять", "Polish": "Pięć", "Bokmål": "Fem" }, "gender": "none", "icon": "5.circle" },
+        { "nynorsk": "Seks", "translations": { "Russian": "Шесть", "English": "Six", "Ukrainian": "Шість", "Polish": "Sześć", "Bokmål": "Seks" }, "gender": "none", "icon": "6.circle" },
+        { "nynorsk": "Sju", "translations": { "Russian": "Семь", "English": "Seven", "Ukrainian": "Сім", "Polish": "Siedem", "Bokmål": "Syv" }, "gender": "none", "icon": "7.circle" },
+        { "nynorsk": "Åtte", "translations": { "Russian": "Восемь", "English": "Eight", "Ukrainian": "Вісім", "Polish": "Osiem", "Bokmål": "Åtte" }, "gender": "none", "icon": "8.circle" },
+        { "nynorsk": "Ni", "translations": { "Russian": "Девять", "English": "Nine", "Ukrainian": "Дев'ять", "Polish": "Dziewięć", "Bokmål": "Ni" }, "gender": "none", "icon": "9.circle" },
+        { "nynorsk": "Ti", "translations": { "Russian": "Десять", "English": "Ten", "Ukrainian": "Десять", "Polish": "Dziesięć", "Bokmål": "Ti" }, "gender": "none", "icon": "10.circle" }
+      ]
+    },
+    {
+      "id": "fargar",
+      "nynorsk_title": "Fargar",
+      "emoji": "🎨",
+      "rank": "oppdagar",
+      "level": "A0",
+      "translations": {
+        "Russian": "Цвета",
+        "English": "Colors",
+        "Ukrainian": "Кольори",
+        "Polish": "Kolory",
+        "Bokmål": "Farger"
+      },
+      "words": [
+        { "nynorsk": "Raud", "translations": { "Russian": "Красный", "English": "Red", "Ukrainian": "Червоний", "Polish": "Czerwony", "Bokmål": "Rød" }, "gender": "none", "icon": "paintpalette.fill" },
+        { "nynorsk": "Blå", "translations": { "Russian": "Синий", "English": "Blue", "Ukrainian": "Синій", "Polish": "Niebieski", "Bokmål": "Blå" }, "gender": "none", "icon": "drop.fill" },
+        { "nynorsk": "Grøn", "translations": { "Russian": "Зеленый", "English": "Green", "Ukrainian": "Зелений", "Polish": "Zielony", "Bokmål": "Grønn" }, "gender": "none", "icon": "leaf.fill" },
+        { "nynorsk": "Gul", "translations": { "Russian": "Желтый", "English": "Yellow", "Ukrainian": "Жовтий", "Polish": "Żółty", "Bokmål": "Gul" }, "gender": "none", "icon": "sun.max.fill" },
+        { "nynorsk": "Svart", "translations": { "Russian": "Черный", "English": "Black", "Ukrainian": "Чорний", "Polish": "Czarny", "Bokmål": "Svart" }, "gender": "none", "icon": "moon.fill" },
+        { "nynorsk": "Kvit", "translations": { "Russian": "Белый", "English": "White", "Ukrainian": "Білий", "Polish": "Biały", "Bokmål": "Hvit" }, "gender": "none", "icon": "cloud.fill" }
+      ]
+    },
+    {
+      "id": "familie",
+      "nynorsk_title": "Familie",
+      "emoji": "👨‍👩‍👧‍👦",
+      "rank": "sjofarar",
+      "level": "A1",
+      "translations": {
+        "Russian": "Семья",
+        "English": "Family",
+        "Ukrainian": "Сім'я",
+        "Polish": "Rodzina",
+        "Bokmål": "Familie"
+      },
+      "words": [
+        { "nynorsk": "Ei mor", "translations": { "Russian": "Мама", "English": "Mother", "Ukrainian": "Мама", "Polish": "Matka", "Bokmål": "Ei mor" }, "gender": "feminine", "icon": "figure.child.and.lock" },
+        { "nynorsk": "Ein far", "translations": { "Russian": "Папа", "English": "Father", "Ukrainian": "Тато", "Polish": "Ojciec", "Bokmål": "En far" }, "gender": "masculine", "icon": "figure.stand" },
+        { "nynorsk": "Ei syster", "translations": { "Russian": "Сестра", "English": "Sister", "Ukrainian": "Сестра", "Polish": "Siostra", "Bokmål": "Ei søster" }, "gender": "feminine", "icon": "figure.dress.line.vertical.figure" },
+        { "nynorsk": "Ein bror", "translations": { "Russian": "Брат", "English": "Brother", "Ukrainian": "Брат", "Polish": "Brat", "Bokmål": "En bror" }, "gender": "masculine", "icon": "figure.stand.line.dotted.figure.stand" }
+      ]
+    },
+    {
+      "id": "mat",
+      "nynorsk_title": "Mat",
+      "emoji": "🍎",
+      "rank": "sjofarar",
+      "level": "A1",
+      "translations": {
+        "Russian": "Еда", "English": "Food", "Ukrainian": "Їжа", "Polish": "Jedzenie", "Bokmål": "Mat"
+      },
+      "words": [
+        { "nynorsk": "Eit eple", "translations": { "Russian": "Яблоко", "English": "Apple", "Ukrainian": "Яблуко", "Polish": "Jabłko", "Bokmål": "Et eple" }, "gender": "neuter", "icon": "apple.logo" },
+        { "nynorsk": "Brød", "translations": { "Russian": "Хлеб", "English": "Bread", "Ukrainian": "Хліб", "Polish": "Chleb", "Bokmål": "Brød" }, "gender": "neuter", "icon": "birthday.cake" },
+        { "nynorsk": "Vatn", "translations": { "Russian": "Вода", "English": "Water", "Ukrainian": "Вода", "Polish": "Woda", "Bokmål": "Vann" }, "gender": "neuter", "icon": "water.waves" },
+        { "nynorsk": "Kaffi", "translations": { "Russian": "Кофе", "English": "Coffee", "Ukrainian": "Кава", "Polish": "Kawa", "Bokmål": "Kaffe" }, "gender": "masculine", "icon": "cup.and.saucer.fill" }
+      ]
+    },
+    {
+      "id": "jobb",
+      "nynorsk_title": "Jobb",
+      "emoji": "💼",
+      "rank": "krigar",
+      "level": "B1",
+      "translations": {
+        "Russian": "Работа", "English": "Work", "Ukrainian": "Робота", "Polish": "Praca", "Bokmål": "Jobb"
+      },
+      "words": [
+        { "nynorsk": "Ei løn", "translations": { "Russian": "Зарплата", "English": "Salary", "Ukrainian": "Зарплата", "Polish": "Pensja", "Bokmål": "Ei lønn" }, "gender": "feminine", "icon": "banknote" },
+        { "nynorsk": "Ein sjef", "translations": { "Russian": "Начальник", "English": "Boss", "Ukrainian": "Начальник", "Polish": "Szef", "Bokmål": "En sjef" }, "gender": "masculine", "icon": "person.bust.fill" },
+        { "nynorsk": "Å søkje", "translations": { "Russian": "Искать (работу)", "English": "To apply", "Ukrainian": "Шукати (роботу)", "Polish": "Szukać", "Bokmål": "Å søke" }, "gender": "none", "icon": "magnifyingglass" },
+        { "nynorsk": "Erfaring", "translations": { "Russian": "Опыт", "English": "Experience", "Ukrainian": "Досвід", "Polish": "Doświadczenie", "Bokmål": "Erfaring" }, "gender": "feminine", "icon": "star.fill" }
+      ]
+    },
+    {
+      "id": "samfunn",
+      "nynorsk_title": "Samfunn",
+      "emoji": "⚖️",
+      "rank": "jarl",
+      "level": "C1",
+      "translations": {
+        "Russian": "Общество", "English": "Society", "Ukrainian": "Суспільство", "Polish": "Społeczeństwo", "Bokmål": "Samfunn"
+      },
+      "words": [
+        { "nynorsk": "Berekraftig", "translations": { "Russian": "Устойчивый", "English": "Sustainable", "Ukrainian": "Стійкий", "Polish": "Zrównoważony", "Bokmål": "Bærekraftig" }, "gender": "none", "icon": "globe.europe.africa" },
+        { "nynorsk": "Demokrati", "translations": { "Russian": "Демократия", "English": "Democracy", "Ukrainian": "Демократія", "Polish": "Demokracja", "Bokmål": "Demokrati" }, "gender": "neuter", "icon": "building.columns.fill" },
+        { "nynorsk": "Ytringsfridom", "translations": { "Russian": "Свобода слова", "English": "Freedom of Speech", "Ukrainian": "Свобода слова", "Polish": "Wolność słowa", "Bokmål": "Ytringsfrihet" }, "gender": "masculine", "icon": "mic.fill" }
+      ]
+    }
+  ]
+}

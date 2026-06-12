@@ -1,0 +1,27 @@
+# Xcode
+*.xcodeproj/xcuserdata/
+*.xcodeproj/project.xcworkspace/xcuserdata/
+DerivedData/
+.DS_Store
+*.swiftpm
+
+# Build
+.build/
+Build/
+*.app
+
+# IDE
+.vscode/
+.idea/
+
+# macOS
+.DS_Store
+*.swp
+*.swo
+*~
+
+# Pods (if using CocoaPods)
+Pods/
+Podfile.lock
+NynorskCoach/Resources/Secrets.swift
+NynorskCoach.xcodeproj/xcshareddata/xcschemes/
