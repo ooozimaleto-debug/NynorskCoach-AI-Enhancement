@@ -36,7 +36,14 @@
 		642D9DD72EDFA0F40087119D /* GrammarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 642D9DD62EDFA0F40087119D /* GrammarView.swift */; };
 		642D9DD92EDFA15A0087119D /* PodcastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 642D9DD82EDFA15A0087119D /* PodcastView.swift */; };
 		643FF9492FDC21540010F55D /* UserContextManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 643FF9482FDC21540010F55D /* UserContextManager.swift */; };
-		643FF94C2FDC2AC90010F55D /* PROGRESS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 643FF94B2FDC2AB20010F55D /* PROGRESS.swift */; };
+		643FF9542FDC939E0010F55D /* AdaptiveQuizEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 643FF9532FDC939E0010F55D /* AdaptiveQuizEngine.swift */; };
+		643FF9562FDC93B40010F55D /* ExerciseGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 643FF9552FDC93B40010F55D /* ExerciseGenerator.swift */; };
+		643FF9582FDC93E10010F55D /* ExerciseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 643FF9572FDC93E10010F55D /* ExerciseView.swift */; };
+		643FF95A2FDC94010010F55D /* LessonUIKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 643FF9592FDC94010010F55D /* LessonUIKit.swift */; };
+		643FF9602FDC94580010F55D /* StoryGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 643FF95F2FDC94580010F55D /* StoryGenerator.swift */; };
+		643FF9772FDCA38B0010F55D /* IntegrationAdapters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 643FF9762FDCA38B0010F55D /* IntegrationAdapters.swift */; };
+		643FF9852FDCC8E30010F55D /* KeychainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 643FF9842FDCC8E30010F55D /* KeychainManager.swift */; };
+		643FF9872FDCD2390010F55D /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 643FF9862FDCD2390010F55D /* PrivacyInfo.xcprivacy */; };
 		648515D92EF539B300763F44 /* LibraryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 648515D82EF539B300763F44 /* LibraryView.swift */; };
 		648515DB2EF556CD00763F44 /* ROADMAP.md in Resources */ = {isa = PBXBuildFile; fileRef = 648515DA2EF556BC00763F44 /* ROADMAP.md */; };
 		648515E32EF576CB00763F44 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 648515E22EF576CB00763F44 /* WidgetKit.framework */; };
@@ -153,7 +160,14 @@
 		642D9DD62EDFA0F40087119D /* GrammarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrammarView.swift; sourceTree = "<group>"; };
 		642D9DD82EDFA15A0087119D /* PodcastView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PodcastView.swift; sourceTree = "<group>"; };
 		643FF9482FDC21540010F55D /* UserContextManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserContextManager.swift; sourceTree = "<group>"; };
-		643FF94B2FDC2AB20010F55D /* PROGRESS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PROGRESS.swift; sourceTree = "<group>"; };
+		643FF9532FDC939E0010F55D /* AdaptiveQuizEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdaptiveQuizEngine.swift; sourceTree = "<group>"; };
+		643FF9552FDC93B40010F55D /* ExerciseGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseGenerator.swift; sourceTree = "<group>"; };
+		643FF9572FDC93E10010F55D /* ExerciseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseView.swift; sourceTree = "<group>"; };
+		643FF9592FDC94010010F55D /* LessonUIKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonUIKit.swift; sourceTree = "<group>"; };
+		643FF95F2FDC94580010F55D /* StoryGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryGenerator.swift; sourceTree = "<group>"; };
+		643FF9762FDCA38B0010F55D /* IntegrationAdapters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntegrationAdapters.swift; sourceTree = "<group>"; };
+		643FF9842FDCC8E30010F55D /* KeychainManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainManager.swift; sourceTree = "<group>"; };
+		643FF9862FDCD2390010F55D /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		648515D82EF539B300763F44 /* LibraryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryView.swift; sourceTree = "<group>"; };
 		648515DA2EF556BC00763F44 /* ROADMAP.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = ROADMAP.md; sourceTree = "<group>"; };
 		648515E02EF576CB00763F44 /* NynorskWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = NynorskWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -288,6 +302,7 @@
 				6416D7232ED4BD82000F4352 /* Resources */,
 				6416D7182ED4BC47000F4352 /* Views */,
 				6416D71B2ED4BC95000F4352 /* Models */,
+				643FF9862FDCD2390010F55D /* PrivacyInfo.xcprivacy */,
 			);
 			path = NynorskCoach;
 			sourceTree = "<group>";
@@ -349,6 +364,8 @@
 		6416D7242ED4BDB2000F4352 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				643FF9572FDC93E10010F55D /* ExerciseView.swift */,
+				643FF9592FDC94010010F55D /* LessonUIKit.swift */,
 				64AEF6982F1073FB00180AD1 /* WordOverlayView.swift */,
 				648516142EF7C03E00763F44 /* SplashScreenView.swift */,
 				642D9DC82EDD0FE70087119D /* StreakView.swift */,
@@ -393,14 +410,6 @@
 			path = Onboarding;
 			sourceTree = "<group>";
 		};
-		643FF94A2FDC2A990010F55D /* Status */ = {
-			isa = PBXGroup;
-			children = (
-				643FF94B2FDC2AB20010F55D /* PROGRESS.swift */,
-			);
-			path = Status;
-			sourceTree = "<group>";
-		};
 		648515E12EF576CB00763F44 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -438,10 +447,15 @@
 		648516002EF6AC3B00763F44 /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				64AEF6892F10720700180AD1 /* DailyBonusManager.swift */,
-				643FF9482FDC21540010F55D /* UserContextManager.swift */,
-				64AEF6812F0D939D00180AD1 /* ContentRepository.swift */,
 				64AEF66D2F0D89BF00180AD1 /* AI */,
+				643FF9532FDC939E0010F55D /* AdaptiveQuizEngine.swift */,
+				643FF9762FDCA38B0010F55D /* IntegrationAdapters.swift */,
+				643FF9552FDC93B40010F55D /* ExerciseGenerator.swift */,
+				64AEF6892F10720700180AD1 /* DailyBonusManager.swift */,
+				643FF95F2FDC94580010F55D /* StoryGenerator.swift */,
+				643FF9482FDC21540010F55D /* UserContextManager.swift */,
+				643FF9842FDCC8E30010F55D /* KeychainManager.swift */,
+				64AEF6812F0D939D00180AD1 /* ContentRepository.swift */,
 				648516012EF6AC6600763F44 /* AudioManager.swift */,
 				648516032EF6B2A300763F44 /* LocalizationManager.swift */,
 				648516072EF6C66E00763F44 /* QuestManager.swift */,
@@ -509,7 +523,6 @@
 		64AEF6A02F10769A00180AD1 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				643FF94A2FDC2A990010F55D /* Status */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -575,9 +588,9 @@
 		6416D6D82ED4B77F000F4352 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				BuildIndependentTargetsInParallel = NO;
+				BuildIndependentTargetsInParallel = YES;
 				LastSwiftUpdateCheck = 2620;
-				LastUpgradeCheck = 2620;
+				LastUpgradeCheck = 2630;
 				TargetAttributes = {
 					6416D6DF2ED4B77F000F4352 = {
 						CreatedOnToolsVersion = 26.1.1;
@@ -619,6 +632,7 @@
 			files = (
 				642D9DD52EDF6FF50087119D /* Localizable.xcstrings in Resources */,
 				6485166B2EFDCCB400763F44 /* LaunchScreen.storyboard in Resources */,
+				643FF9872FDCD2390010F55D /* PrivacyInfo.xcprivacy in Resources */,
 				648515DB2EF556CD00763F44 /* ROADMAP.md in Resources */,
 				6416D7582ED8D8B4000F4352 /* Assets.xcassets in Resources */,
 			);
@@ -660,8 +674,11 @@
 				64A2A3442F02CBA80011C820 /* PromptService.swift in Sources */,
 				6416D7332ED4E64D000F4352 /* WordListView.swift in Sources */,
 				6416D73B2ED4F556000F4352 /* GenerateStoryView.swift in Sources */,
+				643FF95A2FDC94010010F55D /* LessonUIKit.swift in Sources */,
+				643FF9602FDC94580010F55D /* StoryGenerator.swift in Sources */,
 				648516602EFD878500763F44 /* RSSService.swift in Sources */,
 				648516642EFDA3E600763F44 /* AppIntents.swift in Sources */,
+				643FF9582FDC93E10010F55D /* ExerciseView.swift in Sources */,
 				6485162F2EF8663300763F44 /* PracticeView.swift in Sources */,
 				6485160F2EF7B09B00763F44 /* StoriesView.swift in Sources */,
 				6485162D2EF862A500763F44 /* DataSeeder.swift in Sources */,
@@ -678,6 +695,7 @@
 				648516152EF7C03E00763F44 /* SplashScreenView.swift in Sources */,
 				642D9DD72EDFA0F40087119D /* GrammarView.swift in Sources */,
 				64F943202EE20EB8001FD33C /* DailyWordView.swift in Sources */,
+				643FF9542FDC939E0010F55D /* AdaptiveQuizEngine.swift in Sources */,
 				6416D7132ED4B9BF000F4352 /* AudioService.swift in Sources */,
 				6416D71A2ED4BC76000F4352 /* FlowLayout.swift in Sources */,
 				648516132EF7BE7D00763F44 /* SettingsView.swift in Sources */,
@@ -689,6 +707,7 @@
 				64A2A34B2F0304290011C820 /* TopicSelectionView.swift in Sources */,
 				6416D7112ED4B98C000F4352 /* OpenAIService.swift in Sources */,
 				6416D7152ED4B9E9000F4352 /* ImageService.swift in Sources */,
+				643FF9562FDC93B40010F55D /* ExerciseGenerator.swift in Sources */,
 				648516312EF8705700763F44 /* ChatView.swift in Sources */,
 				6416D7402ED506FF000F4352 /* ProfileView.swift in Sources */,
 				648516172EF7D4F600763F44 /* AppBackground.swift in Sources */,
@@ -696,7 +715,6 @@
 				64AEF6802F0D938000180AD1 /* ChatViewModel.swift in Sources */,
 				648516262EF8445F00763F44 /* XPManager.swift in Sources */,
 				6416D7642ED91360000F4352 /* ImportTextView.swift in Sources */,
-				643FF94C2FDC2AC90010F55D /* PROGRESS.swift in Sources */,
 				64AEF6822F0D939D00180AD1 /* ContentRepository.swift in Sources */,
 				648516042EF6B2A300763F44 /* LocalizationManager.swift in Sources */,
 				64AEF68A2F10720700180AD1 /* DailyBonusManager.swift in Sources */,
@@ -705,9 +723,11 @@
 				643FF9492FDC21540010F55D /* UserContextManager.swift in Sources */,
 				64F9431C2EE1FE5B001FD33C /* QuizView.swift in Sources */,
 				642D9DC32EDD0D5C0087119D /* NotificationManager.swift in Sources */,
+				643FF9852FDCC8E30010F55D /* KeychainManager.swift in Sources */,
 				64F9431E2EE20CE9001FD33C /* HapticManager.swift in Sources */,
 				648516292EF84F3400763F44 /* StoreView.swift in Sources */,
 				64089B822F0920CA00B47B13 /* NewsFeedView.swift in Sources */,
+				643FF9772FDCA38B0010F55D /* IntegrationAdapters.swift in Sources */,
 				64A2A33C2F02B78A0011C820 /* ActivityDetailView.swift in Sources */,
 				6416D74E2ED5122D000F4352 /* ExamView.swift in Sources */,
 				64AEF67C2F0D932000180AD1 /* ChatModels.swift in Sources */,

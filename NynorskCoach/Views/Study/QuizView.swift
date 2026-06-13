@@ -397,3 +397,4 @@ struct GameOverView: View {
         .padding()
     }
 }
+

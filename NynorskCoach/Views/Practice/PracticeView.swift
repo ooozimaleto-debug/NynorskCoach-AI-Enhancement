@@ -168,7 +168,7 @@ struct PracticeView: View {
             // --- НАВИГАЦИЯ ---
             .fullScreenCover(isPresented: $showQuiz) { QuizView() }
             .fullScreenCover(isPresented: $showExam) { ExamView() }
-            .fullScreenCover(isPresented: $showVision) { 
+            .fullScreenCover(isPresented: $showVision) {
                 UnifiedVisionView(initialMode: visionMode)
             }
             .sheet(item: $selectedScenario) { sc in ChatView(scenario: sc) }
@@ -278,3 +278,4 @@ struct PracticeCard: View {
         }
     }
 }
+

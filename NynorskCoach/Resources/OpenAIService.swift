@@ -106,10 +106,10 @@ class OpenAIService {
         
         switch model.provider {
         case .deepseek:
-            apiKey = Secrets.deepSeekApiKey
-            urlString = Secrets.deepSeekURL
+            apiKey = Secrets.deepSeekKey
+            urlString = Secrets.apiURL
         case .openai:
-            apiKey = Secrets.apiKey
+            apiKey = Secrets.openAIKey
             urlString = Secrets.apiURL
         }
         
@@ -276,7 +276,7 @@ class OpenAIService {
     
     private func performVisionRequest<T: Decodable>(messageContent: [String: Any]) async throws -> T {
         guard let url = URL(string: Secrets.apiURL) else { throw URLError(.badURL) }
-        let cleanKey = Secrets.apiKey.trimmingCharacters(in: .whitespacesAndNewlines)
+        let cleanKey = Secrets.openAIKey.trimmingCharacters(in: .whitespacesAndNewlines)
         
         var lastError: Error?
         let maxRetries = 3
@@ -448,7 +448,7 @@ class OpenAIService {
     
     // 9. Озвучка (OpenAI TTS)
     func generateSpeech(text: String, mentor: Mentor? = nil) async throws -> Data {
-        guard !Secrets.apiKey.isEmpty else { throw OpenAIError.invalidAPIKey }
+        guard !Secrets.openAIKey.isEmpty else { throw OpenAIError.invalidAPIKey }
         guard let url = URL(string: "https://api.openai.com/v1/audio/speech") else { throw OpenAIError.unknown }
         
         // Определяем наставника
@@ -467,7 +467,7 @@ class OpenAIService {
         
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
-        let cleanKey = Secrets.apiKey.trimmingCharacters(in: .whitespacesAndNewlines)
+        let cleanKey = Secrets.openAIKey.trimmingCharacters(in: .whitespacesAndNewlines)
         request.addValue("Bearer \(cleanKey)", forHTTPHeaderField: "Authorization")
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         

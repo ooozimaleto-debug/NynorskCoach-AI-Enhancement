@@ -66,7 +66,7 @@ class GoogleTTSService {
     
     // 3. ПРИВАТНЫЙ МЕТОД ЗАПРОСА (ЯДРО)
     private func fetchAudio(text: String, voiceName: String, pitch: Double = 0.0) async throws -> Data {
-        let apiKey = Secrets.googleApiKey
+        let apiKey = Secrets.googleKey
         
         guard !apiKey.isEmpty, !apiKey.contains("ВСТАВИТЬ") else {
             print("❌ ОШИБКА: Google API Key не установлен в Secrets.swift")

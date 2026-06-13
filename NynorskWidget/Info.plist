@@ -6,6 +6,14 @@
 	<dict>
 		<key>NSExtensionPointIdentifier</key>
 		<string>com.apple.widgetkit-extension</string>
+		<key>NSMicrophoneUsageDescription</key>
+		<string>Microphone access allows us to listen to your pronunciation during lessons</string>
+		<key>NSPhotoLibraryUsageDescription</key>
+		<string>Photo library access lets you scan text from your device</string>
+		<key>NSCameraUsageDescription</key>
+		<string>Camera access allows you to scan text and objects in real-time</string>
+		<key>NSSpeechRecognitionUsageDescription</key>
+		<string>Speech recognition helps us understand your Norwegian pronunciation</string>
 	</dict>
 </dict>
 </plist>

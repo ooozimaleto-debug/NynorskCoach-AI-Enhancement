@@ -16,7 +16,7 @@ struct UnsplashURLs: Decodable {
 class ImageService: ObservableObject {
     static let shared = ImageService()
     
-    private let accessKey = Secrets.unsplashAccessKey
+    private let accessKey = Secrets.unsplashKey
     
     // Возвращает массив картинок (Data)
     func searchImages(query: String, count: Int = 5) async throws -> [Data] {

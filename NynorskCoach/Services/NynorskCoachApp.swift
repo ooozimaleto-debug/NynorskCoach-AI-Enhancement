@@ -33,7 +33,9 @@ struct NynorskCoachApp: App {
         do { return try ModelContainer(for: schema, configurations: [modelConfiguration]) }
         catch { fatalError("Could not create ModelContainer: \(error)") }
     }()
-
+    init() {
+            Secrets.initializeKeys()
+        }
     var body: some Scene {
         WindowGroup {
             ZStack {
