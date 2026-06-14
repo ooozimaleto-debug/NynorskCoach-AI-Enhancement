@@ -50,12 +50,12 @@ struct UnifiedVisionView: View {
                 }
             }
             .sheet(isPresented: $viewModel.showCamera) {
-                SharedImagePicker(sourceType: .camera) { img in
+                ImagePickerView(sourceType: .camera) { img in
                     processImage(img)
                 }
             }
             .sheet(isPresented: $viewModel.showGallery) {
-                SharedImagePicker(sourceType: .photoLibrary) { img in
+                ImagePickerView(sourceType: .photoLibrary) { img in
                     processImage(img)
                 }
             }
