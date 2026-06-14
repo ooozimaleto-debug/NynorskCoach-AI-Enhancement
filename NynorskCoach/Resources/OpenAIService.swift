@@ -107,7 +107,7 @@ class OpenAIService {
         switch model.provider {
         case .deepseek:
             apiKey = Secrets.deepSeekKey
-            urlString = Secrets.apiURL
+            urlString = Secrets.deepSeekURL
         case .openai:
             apiKey = Secrets.openAIKey
             urlString = Secrets.apiURL
