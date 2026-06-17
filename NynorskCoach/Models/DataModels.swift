@@ -92,8 +92,9 @@ enum Mentor: String, Codable, CaseIterable, Identifiable {
     /// Имя голоса для Google TTS
     var googleVoiceName: String {
         switch self {
-        case .freya: return "nn-NO-Wavenet-E" // Женский (Валькирия)
-        case .loki, .odin: return "nn-NO-Wavenet-D" // Мужской (Викинг)
+        case .freya: return "nb-NO-Wavenet-E" // Женский (Валькирия)
+        case .loki: return "nb-NO-Wavenet-D" // Мужской (Викинг)
+        case .odin: return "nb-NO-Wavenet-B" // Мужской (другой тембр)
         }
     }
     
@@ -360,6 +361,7 @@ class PersistedMessage {
 @Model
 class SavedPodcast {
     @Attribute(.unique) var id: UUID; var title: String; var transcript: String; var dateSaved: Date
+    @Attribute(.externalStorage) var linesData: Data?
     init(title: String, transcript: String) { self.id = UUID(); self.title = title; self.transcript = transcript; self.dateSaved = Date.now }
 }
 

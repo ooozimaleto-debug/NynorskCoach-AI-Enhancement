@@ -25,3 +25,9 @@ Pods/
 Podfile.lock
 NynorskCoach/Resources/Secrets.swift
 NynorskCoach.xcodeproj/xcshareddata/xcschemes/
+
+# Wrangler cache (contains auth tokens)
+cloudflare-worker/.wrangler/
+
+# Repomix dumps
+repomix-output.xml

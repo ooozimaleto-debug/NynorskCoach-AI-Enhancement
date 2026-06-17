@@ -1,8 +1,9 @@
 import Foundation
 
 enum Constants {
-    // Настройки App Group (для виджетов)
-    static let appGroupIdentifier = "group.com.abzac.NynorskCoach"
+    // ВАЖНО: должен совпадать с com.apple.security.application-groups
+    // в NynorskCoach.entitlements и NynorskWidgetExtension.entitlements
+    static let appGroupIdentifier = "group.ooo.zimaleto.NynorskCoach"
     
     // Ключи для UserDefaults (AppStorage)
     enum Keys {

@@ -16,6 +16,7 @@ class KeychainManager {
     // MARK: - Save
     
     /// Сохранить значение в Keychain
+    @discardableResult
     func saveKey(_ value: String, forAccount account: String) -> Bool {
         guard let data = value.data(using: .utf8) else {
             print("❌ Keychain: Failed to encode value")

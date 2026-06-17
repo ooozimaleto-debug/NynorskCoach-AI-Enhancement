@@ -100,24 +100,16 @@ class OpenAIService {
         requireJSON: Bool = true,
         maxRetries: Int = 4 // Increased from 3 to 4
     ) async throws -> T {
-        // Выбор API ключа и URL в зависимости от провайдера
-        let apiKey: String
+        // Выбор роута Worker-проксu в зависимости от провайдера
         let urlString: String
-        
+
         switch model.provider {
         case .deepseek:
-            apiKey = Secrets.deepSeekKey
-            urlString = Secrets.deepSeekURL
+            urlString = "\(Secrets.workerBaseURL)/v1/ai/deepseek"
         case .openai:
-            apiKey = Secrets.openAIKey
-            urlString = Secrets.apiURL
+            urlString = "\(Secrets.workerBaseURL)/v1/ai/openai"
         }
-        
-        guard !apiKey.isEmpty else {
-            print("❌ ОШИБКА: API ключ для \(model.provider) не настроен")
-            throw OpenAIError.invalidAPIKey
-        }
-        
+
         guard let url = URL(string: urlString) else {
             throw OpenAIError.unknown
         }
@@ -130,10 +122,10 @@ class OpenAIService {
                 // Создаем запрос
                 var request = URLRequest(url: url)
                 request.httpMethod = "POST"
-                let cleanKey = apiKey.trimmingCharacters(in: .whitespacesAndNewlines)
-                request.addValue("Bearer \(cleanKey)", forHTTPHeaderField: "Authorization")
+                request.addValue(Secrets.appToken, forHTTPHeaderField: "X-App-Token")
+                request.addValue(DeviceIdentity.id, forHTTPHeaderField: "X-Device-ID")
                 request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-                
+
                 // Формируем body с параметрами модели
                 var body: [String: Any] = [
                     "model": model.name,
@@ -275,17 +267,17 @@ class OpenAIService {
     }
     
     private func performVisionRequest<T: Decodable>(messageContent: [String: Any]) async throws -> T {
-        guard let url = URL(string: Secrets.apiURL) else { throw URLError(.badURL) }
-        let cleanKey = Secrets.openAIKey.trimmingCharacters(in: .whitespacesAndNewlines)
-        
+        guard let url = URL(string: "\(Secrets.workerBaseURL)/v1/ai/openai") else { throw URLError(.badURL) }
+
         var lastError: Error?
         let maxRetries = 3
-        
+
         for attempt in 1...maxRetries {
             do {
                 var request = URLRequest(url: url)
                 request.httpMethod = "POST"
-                request.addValue("Bearer \(cleanKey)", forHTTPHeaderField: "Authorization")
+                request.addValue(Secrets.appToken, forHTTPHeaderField: "X-App-Token")
+                request.addValue(DeviceIdentity.id, forHTTPHeaderField: "X-Device-ID")
                 request.addValue("application/json", forHTTPHeaderField: "Content-Type")
                 
                 let body: [String: Any] = [
@@ -448,8 +440,7 @@ class OpenAIService {
     
     // 9. Озвучка (OpenAI TTS)
     func generateSpeech(text: String, mentor: Mentor? = nil) async throws -> Data {
-        guard !Secrets.openAIKey.isEmpty else { throw OpenAIError.invalidAPIKey }
-        guard let url = URL(string: "https://api.openai.com/v1/audio/speech") else { throw OpenAIError.unknown }
+        guard let url = URL(string: "\(Secrets.workerBaseURL)/v1/ai/openai-tts") else { throw OpenAIError.unknown }
         
         // Определяем наставника
         let targetMentor: Mentor
@@ -467,10 +458,10 @@ class OpenAIService {
         
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
-        let cleanKey = Secrets.openAIKey.trimmingCharacters(in: .whitespacesAndNewlines)
-        request.addValue("Bearer \(cleanKey)", forHTTPHeaderField: "Authorization")
+        request.addValue(Secrets.appToken, forHTTPHeaderField: "X-App-Token")
+        request.addValue(DeviceIdentity.id, forHTTPHeaderField: "X-Device-ID")
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        
+
         // Используем tts-1-hd для лучшего качества
         let body: [String: Any] = [
             "model": "tts-1-hd",

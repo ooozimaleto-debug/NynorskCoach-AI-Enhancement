@@ -7,6 +7,7 @@ struct UnifiedVisionView: View {
     @Environment(\.modelContext) var context
     
     @Query(filter: #Predicate<Topic> { $0.isSystem == true }) var systemTopics: [Topic]
+    @Query var savedItems: [LearningItem]   // ← для статуса слов в оверлее
     
     @State private var viewModel: UnifiedVisionViewModel
     
@@ -154,7 +155,7 @@ struct UnifiedVisionView: View {
                             WordOverlayView(
                                 words: viewModel.recognizedWords,
                                 imageSize: image.size,
-                                containerSize: geo.size,
+                                savedItems: savedItems,   // ← было: containerSize: geo.size
                                 onWordTap: { wordText in
                                     if lastOffset == currentOffset {
                                         HapticManager.shared.impact(style: .light)
@@ -465,3 +466,4 @@ struct FeedbackSheet: View {
         }
     }
 }
+

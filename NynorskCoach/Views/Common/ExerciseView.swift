@@ -55,7 +55,7 @@ struct ExerciseView: View {
         .card()
         .animation(.easeInOut(duration: 0.2), value: feedback != nil)
         .onAppear(perform: resetState)
-        .onChange(of: exercise.id) { _ in resetState() }
+        .onChange(of: exercise.id) { resetState() }
     }
 
     // MARK: Header
@@ -338,3 +338,4 @@ private struct StatefulPreview: View {
     }
 }
 #endif
+

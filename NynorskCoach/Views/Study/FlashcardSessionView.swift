@@ -117,8 +117,7 @@ struct CardStack: View {
     @State private var offset: CGSize = .zero // For final animation only
     @GestureState private var gestureTranslation: CGSize = .zero // For interactive drag
     @State private var isFlipped = false
-    let synthesizer = AVSpeechSynthesizer()
-    
+
     var computedOffset: CGSize {
         if offset != .zero { return offset } // Animation in progress
         return gestureTranslation // Interactive drag
@@ -139,38 +138,41 @@ struct CardStack: View {
                 .scaleEffect(0.95).offset(y: 15).opacity(0.6)
             }
             
-            UniversalCard(
-                item: items[currentIndex],
-                isFlipped: isFlipped,
-                activeSkin: activeSkin,
-                isTopCard: true,
-                width: cardSize.width,
-                height: cardSize.height,
-                onPlayAudio: { speak(items[currentIndex].text) }
-            )
-            .offset(x: computedOffset.width, y: computedOffset.height)
-            .rotationEffect(.degrees(Double(computedOffset.width / 15)))
-            .rotation3DEffect(.degrees(isFlipped ? 180 : 0), axis: (x: 0, y: 1, z: 0), perspective: 0.3)
-            .rotation3DEffect(.degrees(Double(computedOffset.width / 10)), axis: (x: 0, y: 1, z: 0), perspective: 0.8)
-            .rotation3DEffect(.degrees(Double(-computedOffset.height / 10)), axis: (x: 1, y: 0, z: 0), perspective: 0.8)
-           
-            .gesture(DragGesture()
-                .updating($gestureTranslation) { value, state, _ in
-                    state = value.translation
+            if currentIndex < items.count {
+                UniversalCard(
+                    item: items[currentIndex],
+                    isFlipped: isFlipped,
+                    activeSkin: activeSkin,
+                    isTopCard: true,
+                    width: cardSize.width,
+                    height: cardSize.height,
+                    onPlayAudio: { speak(items[currentIndex].text) }
+                )
+                .offset(x: computedOffset.width, y: computedOffset.height)
+                .rotationEffect(.degrees(Double(computedOffset.width / 15)))
+                .rotation3DEffect(.degrees(isFlipped ? 180 : 0), axis: (x: 0, y: 1, z: 0), perspective: 0.3)
+                .rotation3DEffect(.degrees(Double(computedOffset.width / 10)), axis: (x: 0, y: 1, z: 0), perspective: 0.8)
+                .rotation3DEffect(.degrees(Double(-computedOffset.height / 10)), axis: (x: 1, y: 0, z: 0), perspective: 0.8)
+
+                .gesture(DragGesture()
+                    .updating($gestureTranslation) { value, state, _ in
+                        state = value.translation
+                    }
+                    .onChanged { val in
+                        updateSwipeStatus(translation: val.translation)
+                    }
+                    .onEnded { val in
+                        endSwipe(translation: val.translation)
+                    }
+                )
+                .onTapGesture {
+                    let willBeFlipped = !isFlipped
+                    withAnimation(.spring(response: 0.5, dampingFraction: 0.7)) {
+                        isFlipped.toggle()
+                    }
+                    if willBeFlipped { speak(items[currentIndex].text) }
+                    AudioManager.shared.play(.click)
                 }
-                .onChanged { val in
-                    updateSwipeStatus(translation: val.translation)
-                }
-                .onEnded { val in
-                    endSwipe(translation: val.translation)
-                }
-            )
-            .onTapGesture {
-                withAnimation(.spring(response: 0.5, dampingFraction: 0.7)) {
-                    isFlipped.toggle()
-                }
-                if isFlipped { speak(items[currentIndex].text) }
-                AudioManager.shared.play(.click)
             }
         }
     }
@@ -181,6 +183,7 @@ struct CardStack: View {
     }
     
     func endSwipe(translation: CGSize) {
+        guard currentIndex < items.count else { return }
         let threshold: CGFloat = 80
         if abs(translation.width) > threshold || abs(translation.height) > threshold {
             let status = swipeStatus ?? .good
@@ -206,9 +209,7 @@ struct CardStack: View {
     }
     
     func speak(_ text: String) {
-        let utterance = AVSpeechUtterance(string: text)
-        utterance.voice = AVSpeechSynthesisVoice(language: "no-NO")
-        synthesizer.speak(utterance)
+        Task { await SpeechService.shared.speak(text: text) }
     }
 }
 
@@ -239,7 +240,15 @@ struct UniversalCard: View {
                 ZStack {
                     if !isFlipped {
                         VStack {
-                            HStack { Spacer(); AudioButton(skin: activeSkin, action: onPlayAudio) }
+                            HStack {
+                                Spacer()
+                                AudioButton(skin: activeSkin, action: {
+                                    Task { await SpeechService.shared.speak(text: item.text, rate: 1.0) }
+                                })
+                                SlowAudioButton(skin: activeSkin, action: {
+                                    Task { await SpeechService.shared.speak(text: item.text, rate: 0.65) }
+                                })
+                            }
                             Spacer()
                         }
                         .padding(20)
@@ -436,6 +445,10 @@ struct SmartIcon: View {
 struct AudioButton: View {
     let skin: String; let action: () -> Void
     var body: some View { Button(action: action) { Image(systemName: "speaker.wave.2.fill").font(.title).foregroundStyle(.blue) } }
+}
+struct SlowAudioButton: View {
+    let skin: String; let action: () -> Void
+    var body: some View { Button(action: action) { Image(systemName: "tortoise.fill").font(.title).foregroundStyle(.blue) } }
 }
 struct ArtifactBackground: View {
     let skin: String; let isPulse: Bool

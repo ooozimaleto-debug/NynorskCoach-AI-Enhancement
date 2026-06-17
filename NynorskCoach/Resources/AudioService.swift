@@ -1,8 +1,9 @@
 import AVFoundation
 import UIKit
+import CryptoKit
 
 @MainActor
-class SpeechService: NSObject, AVSpeechSynthesizerDelegate, AVAudioPlayerDelegate {
+final class SpeechService: NSObject, AVSpeechSynthesizerDelegate, AVAudioPlayerDelegate {
     static let shared = SpeechService()
     
     // 1. Плееры
@@ -41,7 +42,60 @@ class SpeechService: NSObject, AVSpeechSynthesizerDelegate, AVAudioPlayerDelegat
         stop()
         speakNative(text)
     }
-    
+
+    // --- УНИФИЦИРОВАННЫЙ TTS (Google + on-disk cache + offline fallback) ---
+    /// Used by flashcards: caches Google TTS audio on disk, falls back to the
+    /// on-device synthesizer if the network/Worker call fails.
+    func speak(text: String, rate: Float = 1.0, language: String = "nb-NO") async {
+        stop()
+
+        let cacheURL = ttsCacheURL(text: text, language: language, rate: rate)
+        if let cacheURL, let cached = try? Data(contentsOf: cacheURL) {
+            playAudioData(cached)
+            return
+        }
+
+        do {
+            let data = try await GoogleTTSService.shared.generateSpeech(text: text, rate: Double(rate))
+            if let cacheURL {
+                try? FileManager.default.createDirectory(at: cacheURL.deletingLastPathComponent(), withIntermediateDirectories: true)
+                try? data.write(to: cacheURL)
+            }
+            playAudioData(data)
+        } catch {
+            #if DEBUG
+            print("[SpeechService] Google TTS failed: \(error)")
+            #endif
+            speakOffline(text: text, rate: rate, language: language)
+        }
+    }
+
+    // --- ОДИНОЧНАЯ РЕПЛИКА ДИАЛОГА (сохранённые подкасты) ---
+    /// Plays a single DialogueLine's cached Google TTS audio if present,
+    /// otherwise falls back to the modern Google + cache + offline path.
+    func playSingleLine(_ line: DialogueLine) async {
+        stop()
+        if let data = line.audioData {
+            playAudioData(data, isSequence: false)
+        } else {
+            await speak(text: line.text)
+        }
+    }
+
+    private func ttsCacheURL(text: String, language: String, rate: Float) -> URL? {
+        guard let container = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: Constants.appGroupIdentifier) else { return nil }
+        let hash = SHA256.hash(data: Data((text + language).utf8)).map { String(format: "%02x", $0) }.joined()
+        let filename = "\(hash)_\(String(format: "%.2f", rate)).mp3"
+        return container.appendingPathComponent("Library/Caches/tts", isDirectory: true).appendingPathComponent(filename)
+    }
+
+    private func speakOffline(text: String, rate: Float, language: String) {
+        let utterance = AVSpeechUtterance(string: text)
+        utterance.voice = AVSpeechSynthesisVoice(language: language)
+        utterance.rate = Float(AVSpeechUtteranceDefaultSpeechRate) * rate
+        synthesizer.speak(utterance)
+    }
+
     // --- ПОДКАСТЫ (ПЛЕЙЛИСТ) ---
     func playDialogue(lines: [DialogueLine]) {
         stop() // Останавливаем текущее

@@ -12,7 +12,7 @@ class GoogleTTSService {
     }
     
     // 1. ПУБЛИЧНЫЙ МЕТОД ДЛЯ СЛОВ
-    func generateSpeech(text: String, mentor: Mentor? = nil) async throws -> Data {
+    func generateSpeech(text: String, mentor: Mentor? = nil, rate: Double? = nil) async throws -> Data {
         // Определяем наставника (переданный или текущий выбранный)
         let targetMentor: Mentor
         if let mentor = mentor {
@@ -21,11 +21,12 @@ class GoogleTTSService {
             let savedID = UserDefaults.standard.string(forKey: "selectedMentor") ?? Mentor.freya.rawValue
             targetMentor = Mentor(rawValue: savedID) ?? .freya
         }
-        
+
         return try await fetchAudio(
             text: text,
             voiceName: targetMentor.googleVoiceName,
-            pitch: targetMentor.googlePitch
+            pitch: targetMentor.googlePitch,
+            rate: rate
         )
     }
     
@@ -65,30 +66,24 @@ class GoogleTTSService {
     }
     
     // 3. ПРИВАТНЫЙ МЕТОД ЗАПРОСА (ЯДРО)
-    private func fetchAudio(text: String, voiceName: String, pitch: Double = 0.0) async throws -> Data {
-        let apiKey = Secrets.googleKey
-        
-        guard !apiKey.isEmpty, !apiKey.contains("ВСТАВИТЬ") else {
-            print("❌ ОШИБКА: Google API Key не установлен в Secrets.swift")
-            throw URLError(.userAuthenticationRequired)
-        }
-        
-        let urlString = "https://texttospeech.googleapis.com/v1/text:synthesize?key=\(apiKey)"
+    private func fetchAudio(text: String, voiceName: String, pitch: Double = 0.0, rate: Double? = nil) async throws -> Data {
+        let urlString = "\(Secrets.workerBaseURL)/v1/ai/google-tts"
         guard let url = URL(string: urlString) else { throw URLError(.badURL) }
-        
-        // Скорость речи из настроек (0.25 - 4.0)
+
+        // Скорость речи: явный override (rate) в приоритете, иначе — из настроек (0.25 - 4.0)
         let savedSpeed = UserDefaults.standard.double(forKey: "speechVelocity")
-        // Если 0 (не задано), используем 1.0
-        let speakingRate = (savedSpeed == 0) ? 1.0 : savedSpeed
+        let speakingRate = rate ?? ((savedSpeed == 0) ? 1.0 : savedSpeed)
         
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
+        request.addValue(Secrets.appToken, forHTTPHeaderField: "X-App-Token")
+        request.addValue(DeviceIdentity.id, forHTTPHeaderField: "X-Device-ID")
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        
+
         let body: [String: Any] = [
             "input": ["text": text],
             "voice": [
-                "languageCode": "nn-NO",
+                "languageCode": "nb-NO",
                 "name": voiceName
             ],
             "audioConfig": [

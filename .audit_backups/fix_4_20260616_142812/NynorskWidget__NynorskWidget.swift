@@ -19,7 +19,7 @@ struct SimpleEntry: TimelineEntry {
 // --- 2. ПРОВАЙДЕР ---
 struct Provider: TimelineProvider {
     // APP GROUP ID
-    let appGroup = Constants.appGroupIdentifier  // см. Constants.swift
+    let appGroup = "group.com.abzac.NynorskCoach"
     
     // ModelContainer (Non-isolated for background thread safety)
     func getSharedContainer() -> ModelContainer? {

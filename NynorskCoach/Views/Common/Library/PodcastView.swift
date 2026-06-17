@@ -63,6 +63,7 @@ struct SavedPodcastDetailView: View {
         let id = UUID()
         let speaker: String // "A" или "B"
         let text: String
+        var audioData: Data?
     }
     
     var body: some View {
@@ -130,6 +131,13 @@ struct SavedPodcastDetailView: View {
     
     func parseTranscript() {
         guard parsedLines.isEmpty else { return }
+
+        if let linesData = podcast.linesData,
+           let decoded = try? JSONDecoder().decode([DialogueLine].self, from: linesData) {
+            self.parsedLines = decoded.map { DisplayLine(speaker: $0.speaker, text: $0.text, audioData: $0.audioData) }
+            return
+        }
+
         let rawLines = podcast.transcript.components(separatedBy: .newlines)
         self.parsedLines = rawLines.compactMap { rawLine -> DisplayLine? in
             guard rawLine.contains(":") else { return nil }
@@ -162,7 +170,7 @@ struct SavedPodcastDetailView: View {
     func speakerButton(for line: DisplayLine, icon: String, color: Color) -> some View {
         Button {
             HapticManager.shared.impact(style: .light)
-            playLine(line.text, id: line.id)
+            playLine(line)
         } label: {
             ZStack {
                 Circle().fill(color.opacity(0.2)).frame(width: 44, height: 44)
@@ -191,11 +199,14 @@ struct SavedPodcastDetailView: View {
     
     // parsedLines moved to State and parseTranscript function
     
-    func playLine(_ text: String, id: UUID) {
+    func playLine(_ line: DisplayLine) {
         SpeechService.shared.stop()
-        withAnimation(.spring(response: 0.3, dampingFraction: 0.6)) { self.playingLineId = id }
-        SpeechService.shared.speak(text)
-        let estimatedDuration = Double(text.count) * 0.08 + 0.5
+        withAnimation(.spring(response: 0.3, dampingFraction: 0.6)) { self.playingLineId = line.id }
+        let id = line.id
+        Task {
+            await SpeechService.shared.playSingleLine(DialogueLine(speaker: line.speaker, text: line.text, audioData: line.audioData))
+        }
+        let estimatedDuration = Double(line.text.count) * 0.08 + 0.5
         DispatchQueue.main.asyncAfter(deadline: .now() + estimatedDuration) {
             if self.playingLineId == id { withAnimation { self.playingLineId = nil } }
         }

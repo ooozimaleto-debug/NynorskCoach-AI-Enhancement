@@ -7,8 +7,12 @@ import Foundation
 import Combine
 
 // MARK: - Conformation: UserLearningProfile -> LearnerContextProviding
-
-extension UserLearningProfile: LearnerContextProviding {
+//
+// @preconcurrency: UserLearningProfile is a SwiftData @Model (PersistentModel)
+// which cannot conform to Sendable. @preconcurrency silences the warning in
+// Swift 5 mode and gates the error to Swift 6 mode, giving time to migrate
+// to a value-type snapshot approach if/when Swift 6 is enabled.
+extension UserLearningProfile: @preconcurrency LearnerContextProviding {
     var nativeLanguageCode: String {
         let langName = UserDefaults.standard.string(forKey: "nativeLanguage") ?? "Russian"
         switch langName.lowercased() {
@@ -62,3 +66,4 @@ extension OpenAIService: AICompletionProviding {
         try await generateSimpleChatResponse(systemPrompt: system, userMessage: user)
     }
 }
+

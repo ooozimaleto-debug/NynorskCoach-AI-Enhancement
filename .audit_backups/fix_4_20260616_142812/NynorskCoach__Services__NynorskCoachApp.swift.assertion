@@ -23,7 +23,7 @@ struct NynorskCoachApp: App {
         ])
         
         let modelConfiguration: ModelConfiguration
-        if let containerURL = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: "group.com.abzac.NynorskCoach") {
+        if let containerURL = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: Constants.appGroupIdentifier) {
             let dbURL = containerURL.appendingPathComponent("NynorskCoach.store")
             modelConfiguration = ModelConfiguration(url: dbURL)
         } else {
@@ -33,7 +33,9 @@ struct NynorskCoachApp: App {
         do { return try ModelContainer(for: schema, configurations: [modelConfiguration]) }
         catch { fatalError("Could not create ModelContainer: \(error)") }
     }()
-
+    init() {
+        Secrets.initializeKeys()
+    }
     var body: some Scene {
         WindowGroup {
             ZStack {
@@ -184,3 +186,4 @@ struct MainTabView: View {
         .tint(.blue)
     }
 }
+

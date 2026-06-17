@@ -21,22 +21,21 @@ struct NynorskCoachApp: App {
             PersistedMessage.self, SavedPodcast.self, DailyActivity.self, GrammarNote.self,
             UserLearningProfile.self
         ])
-
+        
         let modelConfiguration: ModelConfiguration
-        if let containerURL = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: Constants.appGroupIdentifier) {
+        if let containerURL = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: "group.com.abzac.NynorskCoach") {
             let dbURL = containerURL.appendingPathComponent("NynorskCoach.store")
             modelConfiguration = ModelConfiguration(url: dbURL)
         } else {
-            // Этот fallback сработает только если entitlements рассинхронизированы
-            // с Constants.appGroupIdentifier. В проде должна работать ветка выше.
-            assertionFailure("App Group container недоступен — проверь entitlements")
             modelConfiguration = ModelConfiguration(isStoredInMemoryOnly: false)
         }
 
         do { return try ModelContainer(for: schema, configurations: [modelConfiguration]) }
         catch { fatalError("Could not create ModelContainer: \(error)") }
     }()
-    init() {}
+    init() {
+        Secrets.initializeKeys()
+    }
     var body: some Scene {
         WindowGroup {
             ZStack {

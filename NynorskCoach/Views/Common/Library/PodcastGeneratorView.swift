@@ -138,6 +138,7 @@ struct PodcastGeneratorView: View {
     func saveAndClose() {
         let fullText = lines.map { "\($0.speaker): \($0.text)" }.joined(separator: "\n\n")
         let newPodcast = SavedPodcast(title: podcastTitle, transcript: fullText)
+        newPodcast.linesData = try? JSONEncoder().encode(lines)
         context.insert(newPodcast)
         XPManager.shared.addXP(50, context: context)
         AudioManager.shared.play(.success)

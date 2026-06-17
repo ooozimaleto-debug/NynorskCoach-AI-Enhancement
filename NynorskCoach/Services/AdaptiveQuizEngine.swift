@@ -176,21 +176,24 @@ extension ExerciseGenerator: QuizItemProviding {
 
 // MARK: - Engine
 
+/// Engine configuration. Defined outside `AdaptiveQuizEngine` so its `init()`
+/// is not @MainActor-isolated and can be used as a default parameter value.
+struct AdaptiveQuizEngineConfig: Sendable {
+    var maxQuestions = 12
+    var minQuestions = 6
+    var masteryThreshold = 0.85
+    var minAttemptsPerSkill = 3
+    var difficultyBand = 1            // ± steps around the learner's level
+    var promoteAfter = 2              // correct-in-a-row to bump difficulty up
+    var learningRate = 0.35
+    var maxConsecutiveSameSkill = 2
+}
+
 @MainActor
 final class AdaptiveQuizEngine: ObservableObject {
 
-    struct Config {
-        var maxQuestions = 12
-        var minQuestions = 6
-        var masteryThreshold = 0.85
-        var minAttemptsPerSkill = 3
-        var difficultyBand = 1            // ± steps around the learner's level
-        var promoteAfter = 2              // correct-in-a-row to bump difficulty up
-        var learningRate = 0.35
-        var maxConsecutiveSameSkill = 2
-
-        init() {}
-    }
+    /// Convenience alias so existing call-sites (`AdaptiveQuizEngine.Config`) still compile.
+    typealias Config = AdaptiveQuizEngineConfig
 
     struct AnswerResult: Sendable {
         let wasCorrect: Bool
@@ -221,7 +224,7 @@ final class AdaptiveQuizEngine: ObservableObject {
     let targetQuestions: Int
 
     private let provider: QuizItemProviding
-    private let config: Config
+    private let config: AdaptiveQuizEngineConfig
     private var tracker: MasteryTracker
     private var difficulty: DifficultyController
     private var lastSkill: SkillTag?
@@ -230,7 +233,7 @@ final class AdaptiveQuizEngine: ObservableObject {
     private static let defaultPool: [SkillTag] =
         [.pronouns, .negation, .questionWords, .nounGender, .aVerbs, .vocabulary]
 
-    init(provider: QuizItemProviding, context: LearnerContextProviding, config: Config = Config()) {
+    init(provider: QuizItemProviding, context: LearnerContextProviding, config: AdaptiveQuizEngineConfig = .init()) {
         self.provider = provider
         self.config = config
         self.targetQuestions = config.maxQuestions
@@ -349,3 +352,4 @@ final class AdaptiveQuizEngine: ObservableObject {
         isFinished = true
     }
 }
+

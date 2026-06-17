@@ -11,6 +11,7 @@
 		64089B802F09206D00B47B13 /* NynorskCoachApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64089B7F2F09206D00B47B13 /* NynorskCoachApp.swift */; };
 		64089B822F0920CA00B47B13 /* NewsFeedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64089B812F0920CA00B47B13 /* NewsFeedView.swift */; };
 		6416D7112ED4B98C000F4352 /* OpenAIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6416D7102ED4B98C000F4352 /* OpenAIService.swift */; };
+		84CA75E1926A5D7E41ED7FA6 /* DeviceIdentity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4797AB118BAEA33C8E9CAC3F /* DeviceIdentity.swift */; };
 		6416D7132ED4B9BF000F4352 /* AudioService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6416D7122ED4B9BF000F4352 /* AudioService.swift */; };
 		6416D7152ED4B9E9000F4352 /* ImageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6416D7142ED4B9E9000F4352 /* ImageService.swift */; };
 		6416D7172ED4BC05000F4352 /* PlatformUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6416D7162ED4BC05000F4352 /* PlatformUtils.swift */; };
@@ -44,6 +45,7 @@
 		643FF9772FDCA38B0010F55D /* IntegrationAdapters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 643FF9762FDCA38B0010F55D /* IntegrationAdapters.swift */; };
 		643FF9852FDCC8E30010F55D /* KeychainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 643FF9842FDCC8E30010F55D /* KeychainManager.swift */; };
 		643FF9872FDCD2390010F55D /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 643FF9862FDCD2390010F55D /* PrivacyInfo.xcprivacy */; };
+		643FF9882FE17B840010F55D /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64BF6F272EFF037400BB2691 /* Constants.swift */; };
 		648515D92EF539B300763F44 /* LibraryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 648515D82EF539B300763F44 /* LibraryView.swift */; };
 		648515DB2EF556CD00763F44 /* ROADMAP.md in Resources */ = {isa = PBXBuildFile; fileRef = 648515DA2EF556BC00763F44 /* ROADMAP.md */; };
 		648515E32EF576CB00763F44 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 648515E22EF576CB00763F44 /* WidgetKit.framework */; };
@@ -135,6 +137,7 @@
 		64089B812F0920CA00B47B13 /* NewsFeedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsFeedView.swift; sourceTree = "<group>"; };
 		6416D6E02ED4B77F000F4352 /* Nynorsk Coach.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Nynorsk Coach.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6416D7102ED4B98C000F4352 /* OpenAIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenAIService.swift; sourceTree = "<group>"; };
+		4797AB118BAEA33C8E9CAC3F /* DeviceIdentity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceIdentity.swift; sourceTree = "<group>"; };
 		6416D7122ED4B9BF000F4352 /* AudioService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioService.swift; sourceTree = "<group>"; };
 		6416D7142ED4B9E9000F4352 /* ImageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageService.swift; sourceTree = "<group>"; };
 		6416D7162ED4BC05000F4352 /* PlatformUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlatformUtils.swift; sourceTree = "<group>"; };
@@ -351,6 +354,7 @@
 			children = (
 				642D9DC02EDD0D380087119D /* Secrets.swift */,
 				6416D7102ED4B98C000F4352 /* OpenAIService.swift */,
+				4797AB118BAEA33C8E9CAC3F /* DeviceIdentity.swift */,
 				64A2A3432F02CBA80011C820 /* PromptService.swift */,
 				6416D7142ED4B9E9000F4352 /* ImageService.swift */,
 				6416D7122ED4B9BF000F4352 /* AudioService.swift */,
@@ -706,6 +710,7 @@
 				64089B802F09206D00B47B13 /* NynorskCoachApp.swift in Sources */,
 				64A2A34B2F0304290011C820 /* TopicSelectionView.swift in Sources */,
 				6416D7112ED4B98C000F4352 /* OpenAIService.swift in Sources */,
+				84CA75E1926A5D7E41ED7FA6 /* DeviceIdentity.swift in Sources */,
 				6416D7152ED4B9E9000F4352 /* ImageService.swift in Sources */,
 				643FF9562FDC93B40010F55D /* ExerciseGenerator.swift in Sources */,
 				648516312EF8705700763F44 /* ChatView.swift in Sources */,
@@ -747,6 +752,7 @@
 				64AEF67B2F0D932000180AD1 /* ScannerModels.swift in Sources */,
 				64AEF6902F10734E00180AD1 /* VisionMode.swift in Sources */,
 				64AEF6912F10734E00180AD1 /* ObjectResult.swift in Sources */,
+				643FF9882FE17B840010F55D /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
