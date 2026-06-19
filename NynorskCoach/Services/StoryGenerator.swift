@@ -180,9 +180,13 @@ final class StoryGenerator {
         let level = context.level
         let words = length.wordTarget(for: level)
         let topic = theme ?? Self.defaultTheme(for: level)
-        let vocab = context.recentVocabulary.isEmpty
+        let pool = LearnerVocabularyPool(words: context.recentVocabulary)
+        let targetWords = LearnerContextBuilder.vocabularyToInject(
+            from: pool, level: level, textLength: words
+        )
+        let vocab = targetWords.isEmpty
             ? "(ingen)"
-            : context.recentVocabulary.prefix(15).joined(separator: ", ")
+            : targetWords.joined(separator: ", ")
 
         return """
         Skriv ei kort forteljing på nynorsk for ein elev på nivå \(level.rawValue.uppercased()).
@@ -190,7 +194,8 @@ final class StoryGenerator {
         Lengd: om lag \(words) ord, fordelt på korte avsnitt.
         Morsmålet til eleven (for ordliste og forklaringar): \(context.nativeLanguageCode).
 
-        Prøv å flette inn nokre av desse orda eleven nyleg har lært: \(vocab)
+        Flett inn desse orda eleven nyleg har lært, for repetisjon: \(vocab)
+        Innfør IKKJE andre uvanlege eller avanserte ord enn dei på denne lista og det som er naturleg for nivået \(level.rawValue.uppercased()) — teksten skal halde seg innanfor ordforrådet eleven allerede kjenner, pluss desse målorda.
 
         Returner BERRE eit JSON-objekt. Inga innleiing, ingen markdown, ingen kodeblokk.
         Strukturen skal vere:

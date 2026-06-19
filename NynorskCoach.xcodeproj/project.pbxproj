@@ -39,6 +39,7 @@
 		643FF9492FDC21540010F55D /* UserContextManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 643FF9482FDC21540010F55D /* UserContextManager.swift */; };
 		643FF9542FDC939E0010F55D /* AdaptiveQuizEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 643FF9532FDC939E0010F55D /* AdaptiveQuizEngine.swift */; };
 		643FF9562FDC93B40010F55D /* ExerciseGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 643FF9552FDC93B40010F55D /* ExerciseGenerator.swift */; };
+		643FF9912FDCD0010010F55D /* LearnerContextBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 643FF9902FDCD0010010F55D /* LearnerContextBuilder.swift */; };
 		643FF9582FDC93E10010F55D /* ExerciseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 643FF9572FDC93E10010F55D /* ExerciseView.swift */; };
 		643FF95A2FDC94010010F55D /* LessonUIKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 643FF9592FDC94010010F55D /* LessonUIKit.swift */; };
 		643FF9602FDC94580010F55D /* StoryGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 643FF95F2FDC94580010F55D /* StoryGenerator.swift */; };
@@ -165,6 +166,7 @@
 		643FF9482FDC21540010F55D /* UserContextManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserContextManager.swift; sourceTree = "<group>"; };
 		643FF9532FDC939E0010F55D /* AdaptiveQuizEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdaptiveQuizEngine.swift; sourceTree = "<group>"; };
 		643FF9552FDC93B40010F55D /* ExerciseGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseGenerator.swift; sourceTree = "<group>"; };
+		643FF9902FDCD0010010F55D /* LearnerContextBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearnerContextBuilder.swift; sourceTree = "<group>"; };
 		643FF9572FDC93E10010F55D /* ExerciseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseView.swift; sourceTree = "<group>"; };
 		643FF9592FDC94010010F55D /* LessonUIKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonUIKit.swift; sourceTree = "<group>"; };
 		643FF95F2FDC94580010F55D /* StoryGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryGenerator.swift; sourceTree = "<group>"; };
@@ -455,6 +457,7 @@
 				643FF9532FDC939E0010F55D /* AdaptiveQuizEngine.swift */,
 				643FF9762FDCA38B0010F55D /* IntegrationAdapters.swift */,
 				643FF9552FDC93B40010F55D /* ExerciseGenerator.swift */,
+				643FF9902FDCD0010010F55D /* LearnerContextBuilder.swift */,
 				64AEF6892F10720700180AD1 /* DailyBonusManager.swift */,
 				643FF95F2FDC94580010F55D /* StoryGenerator.swift */,
 				643FF9482FDC21540010F55D /* UserContextManager.swift */,
@@ -713,6 +716,7 @@
 				84CA75E1926A5D7E41ED7FA6 /* DeviceIdentity.swift in Sources */,
 				6416D7152ED4B9E9000F4352 /* ImageService.swift in Sources */,
 				643FF9562FDC93B40010F55D /* ExerciseGenerator.swift in Sources */,
+				643FF9912FDCD0010010F55D /* LearnerContextBuilder.swift in Sources */,
 				648516312EF8705700763F44 /* ChatView.swift in Sources */,
 				6416D7402ED506FF000F4352 /* ProfileView.swift in Sources */,
 				648516172EF7D4F600763F44 /* AppBackground.swift in Sources */,

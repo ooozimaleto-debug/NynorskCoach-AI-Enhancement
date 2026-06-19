@@ -192,6 +192,13 @@ final class ExerciseGenerator {
     private let context: LearnerContextProviding
     private let model: String
 
+    /// Eyeballed estimate of words in one exercise's `prompt` + `context`
+    /// fields, used only to size the comprehensible-input vocabulary target
+    /// via `LearnerContextBuilder`. Not measured from real generations —
+    /// TODO: replace with an actual average once we have generated-exercise
+    /// telemetry (or just count words in `userPrompt`'s own template parts).
+    private let averageWordsPerExerciseItem = 12
+
     /// - Parameter model: keep in sync with the model string your API client uses.
     init(
         ai: AICompletionProviding,
@@ -292,15 +299,21 @@ final class ExerciseGenerator {
             "\(idx + 1). type=\(item.type.rawValue), skill=\(item.skill.rawValue)"
         }.joined(separator: "\n")
 
-        let vocab = context.recentVocabulary.isEmpty
+        let estimatedTextLength = plan.count * averageWordsPerExerciseItem
+        let pool = LearnerVocabularyPool(words: context.recentVocabulary)
+        let targetWords = LearnerContextBuilder.vocabularyToInject(
+            from: pool, level: difficulty, textLength: estimatedTextLength
+        )
+        let vocab = targetWords.isEmpty
             ? "(ingen)"
-            : context.recentVocabulary.prefix(15).joined(separator: ", ")
+            : targetWords.joined(separator: ", ")
 
         return """
         Lag \(plan.count) øvingar i nynorsk for ein elev på nivå \(difficulty.rawValue.uppercased()).
         Morsmålet til eleven (for forklaringar): \(context.nativeLanguageCode).
 
         Bruk gjerne desse orda som eleven nyleg har lært, for repetisjon: \(vocab)
+        Innfør IKKJE andre uvanlege eller avanserte ord enn dei på denne lista og det som er naturleg for nivået \(difficulty.rawValue.uppercased()).
 
         Lag nøyaktig éi øving per linje under, i same rekkjefølgje:
         \(requests)

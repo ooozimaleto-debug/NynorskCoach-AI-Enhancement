@@ -5,6 +5,7 @@
 
 import Foundation
 import Combine
+import SwiftData
 
 // MARK: - Conformation: UserLearningProfile -> LearnerContextProviding
 //
@@ -56,7 +57,14 @@ extension UserLearningProfile: @preconcurrency LearnerContextProviding {
         }
     }
     
-    var recentVocabulary: [String] { [] }
+    /// Full RED + YELLOW pool (capped, see `LearnerContextBuilder`). Callers
+    /// that build a prompt should slice this via
+    /// `LearnerContextBuilder.vocabularyToInject(from:level:textLength:)`
+    /// rather than taking an arbitrary prefix.
+    var recentVocabulary: [String] {
+        guard let context = modelContext else { return [] }
+        return LearnerContextBuilder.weakVocabularyPool(in: context).words
+    }
 }
 
 // MARK: - Conformation: OpenAIService -> AICompletionProviding
