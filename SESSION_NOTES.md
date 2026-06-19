@@ -29,6 +29,19 @@
 - **Verified:** new saved podcasts play with both Wavenet voices, persist across kill+relaunch.
 - **Legacy podcasts (saved before this fix):** no `linesData`, fall through to async Google path — single voice (no per-speaker data was captured at save time) but at Google quality, not Nora.
 
+### LearnerContextBuilder — replaced empty `recentVocabulary` stub (commit `05f1559`)
+- `IntegrationAdapters.swift`'s `UserLearningProfile.recentVocabulary` was a hardcoded `[]` stub. `ExerciseGenerator` and `StoryGenerator` both consumed it for prompt injection (`.prefix(15)` of nothing → always empty).
+- New file `LearnerContextBuilder.swift`: `LearnerVocabularyPool` (file-level struct, not nested in the `@MainActor` `UserContextManager` — per convention, structs used as default-parameter values can't be nested inside actor-isolated types) + `LearnerContextBuilder` enum.
+- **Final filter** (`weakVocabularyPool(in:)`): `FetchDescriptor<LearningItem>` with `predicate: $0.interval > 0 && $0.interval <= grayIntervalThreshold` (`grayIntervalThreshold = 7.0`), sorted by `nextReviewDate`, `fetchLimit = 100`, then post-filtered `status != .mastered`.
+  - Mirrors `WordOverlayView`'s RED/YELLOW colour convention (RED = `.new`, YELLOW = `.learning`). `.new` items always have `interval == 0` (status flips to `.learning` on first review per `SRSService`), so `interval > 0` already excludes RED.
+  - The `<= 7.0` cap additionally excludes words that are still `.learning` but already `SRSColor.gray` (interval 7–30) — those are reinforced fine via the normal flashcard SRS cycle, not via text-generation prompts. Without this cap, `status != .mastered` alone would have been wider than RED+YELLOW.
+  - Verified at runtime (not just compile-time) with a standalone SwiftData repro on the same Swift 6.2 toolchain: `#Predicate` capturing the unqualified static `grayIntervalThreshold` fetches identically to an inlined literal. (A *qualified* `Type.member` access inside `#Predicate` does fail — but that's a compile-time error, not the access pattern used here.)
+- **Density formula** (`targetVocabularyCount(level:textLength:)`): `targetWordCount = textLength × (1 − coveragePercent)`, coverage by CEFR level per Hu & Nation / Laufer comprehensible-input research: A1→98%, A2→96%, B1→93%, B2→90%.
+- `ExerciseGenerator.userPrompt` and `StoryGenerator.userPrompt` both replaced their old `context.recentVocabulary.prefix(15)` with `LearnerContextBuilder.vocabularyToInject(from:level:textLength:)`, and both prompts now explicitly instruct the model not to introduce extra unfamiliar words beyond the injected list.
+  - `StoryGenerator` uses the real target word count (`length.wordTarget(for: level)`).
+  - `ExerciseGenerator` has no continuous text length, so it uses `plan.count * averageWordsPerExerciseItem` (`averageWordsPerExerciseItem = 12`, an eyeballed estimate, not measured — flagged with a TODO to replace once real generation telemetry exists).
+- `LearnerContextBuilder.swift` had to be added to `project.pbxproj` manually (file refs + Sources build phase) since `Services/` is a plain `PBXGroup`, not a filesystem-synchronized group — new files there aren't auto-included.
+
 ### SwiftData VersionedSchema — attempted, reverted
 - Implemented `SchemaV1: VersionedSchema` (1, 0, 0) + `NynorskCoachMigrationPlan: SchemaMigrationPlan` with `stages: []`, wired into `ModelContainer` in `NynorskCoachApp.swift`.
 - Widget required deviation: `UserLearningProfile` (in `UserContextManager.swift`) not in widget target Sources, so widget kept narrower `Schema([LearningItem.self, Topic.self])` with literal `Schema.Version(1, 0, 0)` tag.
@@ -65,9 +78,9 @@
 
 ### P0 — blockers for App Store
 - **Proper SwiftData migration plan**: must handle App Group + cross-target widget. Must include fatalError fallback (degrade to fresh store, not crash on launch). Test with: kill+relaunch, widget add, schema change roundtrip.
-- **Voice slowdown in flashcards** (SlowAudioButton, rate 0.65): user reports "imperceptible" effect. Cache key includes rate per session notes, but symptom suggests rate not reaching Google or being overridden. Need console-pty diagnostic on slow-button tap.
 
 ### P1 — high value
+- **Step 2: async `loadItems` + move `LearningItem.imageData` out of SwiftData blob storage into App Group file storage.** Not started — separate ticket from the `LearnerContextBuilder` work above, which explicitly left `imageData`/blob logic untouched.
 - **Cloudflare Worker + R2 cache**: shifts SHA256 cache from device to shared edge. ~2-3h for Claude Code. Cost reduction + faster cold-start for new users.
 - **SSML phoneme overrides** for Nynorsk-specific words: hand-curated list of ~50-100 words with IPA. Wavenet supports full SSML for nb-NO.
 - **Slowdown for saved podcasts**: `AVAudioPlayer.rate` (built-in time-stretch). Additive feature.
@@ -81,7 +94,6 @@
 - Production fatalError fallback in `ModelContainer` creation.
 
 ## Backlog (deferred)
-- Migrate `LearningItem.imageData` → App Group file storage.
 - Adaptive playback rate (red/yellow → 0.8x, gray/green → 1.0x).
 - Settings slider for "slow" rate (currently hardcoded 0.65).
 - Rename `AudioService.swift` → `SpeechService.swift` (filename misleading).
